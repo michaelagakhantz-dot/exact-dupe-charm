@@ -73,7 +73,7 @@ export const AgeDonutCard = () => {
               strokeDashoffset={offset}
               strokeLinecap="round"
               filter="url(#donutGlow)"
-              style={{ transition: "stroke-dasharray 1200ms cubic-bezier(.2,.8,.2,1)", transitionDelay: `${i * 150}ms` }}
+              style={{ transition: "stroke-dasharray 1400ms cubic-bezier(.22,1,.36,1), stroke-dashoffset 1400ms cubic-bezier(.22,1,.36,1)", transitionDelay: `${i * 180}ms` }}
             />
           );
         })}
