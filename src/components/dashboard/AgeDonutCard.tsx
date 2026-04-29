@@ -18,8 +18,8 @@ export const AgeDonutCard = () => {
   let acc = 0;
 
   return (
-    <div className="glass-card rounded-[2rem] p-5 flex items-center justify-center relative animate-fade-in overflow-hidden min-h-[200px]">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(268_85%_60%/0.18),transparent_65%)]" />
+    <div className="glass-card card-hover rounded-[2rem] p-5 flex items-center justify-center relative overflow-hidden min-h-[200px]">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(268_85%_60%/0.22),transparent_65%)] animate-halo" />
 
       {segs.filter(s => s.label).map((s, i) => (
         <div
@@ -73,7 +73,7 @@ export const AgeDonutCard = () => {
               strokeDashoffset={offset}
               strokeLinecap="round"
               filter="url(#donutGlow)"
-              style={{ transition: "stroke-dasharray 1200ms cubic-bezier(.2,.8,.2,1)", transitionDelay: `${i * 150}ms` }}
+              style={{ transition: "stroke-dasharray 1400ms cubic-bezier(.22,1,.36,1), stroke-dashoffset 1400ms cubic-bezier(.22,1,.36,1)", transitionDelay: `${i * 180}ms` }}
             />
           );
         })}

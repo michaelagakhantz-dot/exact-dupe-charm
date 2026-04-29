@@ -32,8 +32,8 @@ export const RevenueTrendCard = () => {
   const area = `${toPath(trend)} L 760 110 L 40 110 Z`;
 
   return (
-    <div className="glass-card rounded-[2rem] p-7 animate-fade-in relative overflow-hidden">
-      <div className="pointer-events-none absolute -top-20 left-1/3 w-96 h-40 bg-[radial-gradient(ellipse,hsl(225_95%_60%/0.2),transparent_70%)] blur-2xl" />
+    <div className="glass-card card-hover rounded-[2rem] p-7 relative overflow-hidden">
+      <div className="pointer-events-none absolute -top-20 left-1/3 w-96 h-40 bg-[radial-gradient(ellipse,hsl(225_95%_60%/0.22),transparent_70%)] blur-2xl animate-halo" />
 
       <div className="flex items-start justify-between mb-1 relative">
         <div className="flex items-center gap-3">
@@ -91,7 +91,7 @@ export const RevenueTrendCard = () => {
             fill="none"
             strokeDasharray={len.b}
             strokeDashoffset={draw ? 0 : len.b}
-            style={{ transition: "stroke-dashoffset 1800ms cubic-bezier(.4,0,.2,1)" }}
+            style={{ transition: "stroke-dashoffset 2200ms cubic-bezier(.22,1,.36,1)" }}
           />
           {base.map(([x, y], i) => (
             <circle
@@ -112,7 +112,7 @@ export const RevenueTrendCard = () => {
             filter="url(#lineGlow)"
             strokeDasharray={len.t}
             strokeDashoffset={draw ? 0 : len.t}
-            style={{ transition: "stroke-dashoffset 1800ms cubic-bezier(.4,0,.2,1) 200ms" }}
+            style={{ transition: "stroke-dashoffset 2200ms cubic-bezier(.22,1,.36,1) 250ms" }}
           />
           {trend.map(([x, y], i) => (
             <circle

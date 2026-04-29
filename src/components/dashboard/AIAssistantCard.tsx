@@ -2,7 +2,7 @@ import blob from "@/assets/blob-3d.jpg";
 
 export const AIAssistantCard = () => {
   return (
-    <div className="glass-card rounded-[2rem] p-8 flex flex-col h-full animate-fade-in">
+    <div className="glass-card card-hover rounded-[2rem] p-8 flex flex-col h-full">
       <h2 className="text-2xl font-medium text-foreground mb-4">AI Assistant</h2>
 
       <div className="relative flex-1 flex items-center justify-center my-4">
