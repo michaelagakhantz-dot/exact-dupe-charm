@@ -18,8 +18,8 @@ export const AgeDonutCard = () => {
   let acc = 0;
 
   return (
-    <div className="glass-card rounded-[2rem] p-5 flex items-center justify-center relative animate-fade-in overflow-hidden min-h-[200px]">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(268_85%_60%/0.18),transparent_65%)]" />
+    <div className="glass-card card-hover rounded-[2rem] p-5 flex items-center justify-center relative overflow-hidden min-h-[200px]">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(268_85%_60%/0.22),transparent_65%)] animate-halo" />
 
       {segs.filter(s => s.label).map((s, i) => (
         <div
