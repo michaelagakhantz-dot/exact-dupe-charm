@@ -19,9 +19,9 @@ export const TotalSaleCard = () => {
   }, []);
 
   return (
-    <div className="glass-card card-hover rounded-[2rem] p-7 relative overflow-hidden group">
+    <div className="glass-card rounded-[2rem] p-7 animate-fade-in relative overflow-hidden group">
       {/* ambient glow */}
-      <div className="pointer-events-none absolute -top-24 -right-20 w-72 h-72 rounded-full bg-[radial-gradient(circle,hsl(268_85%_60%/0.25),transparent_70%)] blur-2xl animate-halo" />
+      <div className="pointer-events-none absolute -top-24 -right-20 w-72 h-72 rounded-full bg-[radial-gradient(circle,hsl(268_85%_60%/0.25),transparent_70%)] blur-2xl" />
 
       <div className="flex items-start justify-between mb-2 relative">
         <div className="flex items-center gap-3">
@@ -35,7 +35,7 @@ export const TotalSaleCard = () => {
             </p>
           </div>
         </div>
-        <button className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-secondary/60 transition-all duration-500 ease-[cubic-bezier(.22,1,.36,1)]">
+        <button className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-secondary/60 transition-all">
           <ArrowUpRight className="w-4 h-4" />
         </button>
       </div>
@@ -68,44 +68,27 @@ export const TotalSaleCard = () => {
             const maxH = 170;
             const h = mounted ? (b.h / 100) * maxH : 0;
             const y = 180 - h;
-            const delay = 120 + i * 110;
             return (
-              <g key={i} style={{ transform: "translateZ(0)" }}>
+              <g key={i} style={{ transition: `all 900ms cubic-bezier(.2,.8,.2,1)`, transitionDelay: `${i * 80}ms` }}>
                 {b.highlight && (
-                  <rect
-                    x={x - 4} y={y - 6} width={w + 8} height={h + 6} rx="14"
-                    fill="url(#barHi)" filter="url(#softGlow)"
-                    style={{
-                      transition: `y 1100ms cubic-bezier(.22,1,.36,1) ${delay}ms, height 1100ms cubic-bezier(.22,1,.36,1) ${delay}ms, opacity 600ms ease ${delay}ms`,
-                      opacity: mounted ? 1 : 0,
-                      transformOrigin: "bottom",
-                    }}
-                  />
+                  <rect x={x - 4} y={y - 6} width={w + 8} height={h + 6} rx="14" fill="url(#barHi)" filter="url(#softGlow)" />
                 )}
                 <rect
-                  x={x} y={y} width={w} height={h} rx="12"
+                  x={x}
+                  y={y}
+                  width={w}
+                  height={h}
+                  rx="12"
                   fill={b.highlight ? "url(#barHi)" : "url(#barFill)"}
                   stroke={b.highlight ? "hsl(268 85% 75% / 0.4)" : "transparent"}
                   strokeWidth="1"
-                  style={{
-                    transition: `y 1100ms cubic-bezier(.22,1,.36,1) ${delay}ms, height 1100ms cubic-bezier(.22,1,.36,1) ${delay}ms`,
-                  }}
                 />
                 {b.highlight && (
-                  <rect x={x} y={y} width={w} height={h} rx="12" fill="url(#hatch)"
-                    style={{ transition: `y 1100ms cubic-bezier(.22,1,.36,1) ${delay}ms, height 1100ms cubic-bezier(.22,1,.36,1) ${delay}ms` }}
-                  />
+                  <rect x={x} y={y} width={w} height={h} rx="12" fill="url(#hatch)" />
                 )}
                 {/* dot on top */}
-                <circle cx={x + w / 2} cy={y} r="3" fill="hsl(220 30% 96%)"
-                  style={{
-                    transition: `cy 1100ms cubic-bezier(.22,1,.36,1) ${delay}ms, opacity 500ms ease ${delay + 400}ms`,
-                    opacity: mounted ? 0.85 : 0,
-                  }}
-                />
-                <text x={x + w / 2} y={196} textAnchor="middle" fill="hsl(220 15% 60%)" fontSize="11"
-                  style={{ opacity: mounted ? 1 : 0, transition: `opacity 600ms ease ${delay + 200}ms` }}
-                >
+                <circle cx={x + w / 2} cy={y} r="3" fill="hsl(220 30% 96%)" opacity="0.7" />
+                <text x={x + w / 2} y={196} textAnchor="middle" fill="hsl(220 15% 60%)" fontSize="11">
                   {b.label}
                 </text>
               </g>

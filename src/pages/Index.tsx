@@ -12,7 +12,7 @@ const Index = () => {
       <Sidebar />
       <main className="flex-1 p-6 md:p-8">
         <Header />
-        <div className="grid grid-cols-12 gap-5 stagger">
+        <div className="grid grid-cols-12 gap-5">
           <div className="col-span-12 lg:col-span-5">
             <AIAssistantCard />
           </div>

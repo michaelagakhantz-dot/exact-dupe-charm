@@ -9,11 +9,11 @@ export const CreditRateCard = () => {
   useEffect(() => {
     let raf: number;
     const start = performance.now();
-    const dur = 1800;
-    const ease = (k: number) => 1 - Math.pow(1 - k, 5);
+    const dur = 1400;
     const tick = (t: number) => {
       const k = Math.min(1, (t - start) / dur);
-      setPct(targetPct * ease(k));
+      const eased = 1 - Math.pow(1 - k, 3);
+      setPct(targetPct * eased);
       if (k < 1) raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
@@ -32,8 +32,8 @@ export const CreditRateCard = () => {
   const displayed = Math.round(value * (pct / targetPct || 1));
 
   return (
-    <div className="glass-card card-hover rounded-[2rem] p-6 flex flex-col items-center relative overflow-hidden">
-      <div className="pointer-events-none absolute -bottom-16 inset-x-0 h-40 bg-[radial-gradient(ellipse,hsl(268_85%_60%/0.28),transparent_70%)] blur-2xl animate-halo" />
+    <div className="glass-card rounded-[2rem] p-6 flex flex-col items-center animate-fade-in relative overflow-hidden">
+      <div className="pointer-events-none absolute -bottom-16 inset-x-0 h-40 bg-[radial-gradient(ellipse,hsl(268_85%_60%/0.25),transparent_70%)] blur-2xl" />
 
       <p className="text-foreground text-sm mb-3 relative">Creadit rate</p>
 
