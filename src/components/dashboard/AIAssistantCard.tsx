@@ -1,14 +1,20 @@
-import { AIBlob3D } from "./three/AIBlob3D";
+import blob from "@/assets/blob-3d.jpg";
 
 export const AIAssistantCard = () => {
   return (
     <div className="glass-card rounded-[2rem] p-8 flex flex-col h-full animate-fade-in">
       <h2 className="text-2xl font-medium text-foreground mb-4">AI Assistant</h2>
 
-      <div className="relative flex-1 flex items-center justify-center my-4 min-h-[320px]">
-        <div className="absolute inset-0 m-auto w-[300px] h-[300px] rounded-full bg-[radial-gradient(circle,hsl(268_85%_60%/0.35),transparent_70%)] blur-2xl animate-pulse-glow" />
-        <div className="relative w-full h-[340px]">
-          <AIBlob3D />
+      <div className="relative flex-1 flex items-center justify-center my-4">
+        <div className="absolute inset-0 m-auto w-[280px] h-[280px] rounded-full bg-[radial-gradient(circle,hsl(268_85%_60%/0.3),transparent_70%)] blur-2xl animate-pulse-glow" />
+        <div className="relative w-[300px] h-[300px] rounded-full overflow-hidden animate-float">
+          <img
+            src={blob}
+            alt="AI"
+            className="w-full h-full object-cover animate-spin-slow"
+            style={{ animationDuration: "60s" }}
+            loading="lazy"
+          />
         </div>
       </div>
 
