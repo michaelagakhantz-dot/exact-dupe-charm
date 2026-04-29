@@ -1,31 +1,82 @@
+import { useEffect, useState } from "react";
+
+const segs = [
+  { color: "url(#g1)", len: 32, label: "24-36", labelPos: { top: "8%", right: "8%" } },
+  { color: "url(#g2)", len: 26 },
+  { color: "url(#g3)", len: 22, label: "18-24", labelPos: { bottom: "12%", right: "6%" } },
+  { color: "url(#g4)", len: 20, label: "0-18", labelPos: { top: "46%", left: "4%" } },
+];
+
 export const AgeDonutCard = () => {
-  const segs = [
-    { color: "hsl(268 85% 75%)", offset: 0, len: 30 },
-    { color: "hsl(225 95% 70%)", offset: 30, len: 25 },
-    { color: "hsl(195 85% 70%)", offset: 55, len: 25 },
-    { color: "hsl(320 80% 78%)", offset: 80, len: 20 },
-  ];
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    const t = setTimeout(() => setMounted(true), 120);
+    return () => clearTimeout(t);
+  }, []);
+
   const C = 2 * Math.PI * 42;
+  let acc = 0;
 
   return (
-    <div className="glass-card rounded-[2rem] p-6 flex items-center justify-center relative animate-fade-in">
-      <div className="absolute top-4 right-4 text-[10px] text-muted-foreground bg-secondary/60 px-2 py-0.5 rounded-full">24-36</div>
-      <div className="absolute bottom-6 right-4 text-[10px] text-muted-foreground bg-secondary/60 px-2 py-0.5 rounded-full">18-24</div>
-      <div className="absolute top-1/2 left-3 -translate-y-1/2 text-[10px] text-muted-foreground bg-secondary/60 px-2 py-0.5 rounded-full">0-18</div>
+    <div className="glass-card rounded-[2rem] p-5 flex items-center justify-center relative animate-fade-in overflow-hidden min-h-[200px]">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(268_85%_60%/0.18),transparent_65%)]" />
 
-      <svg viewBox="0 0 100 100" className="w-32 h-32 -rotate-90">
-        {segs.map((s, i) => (
-          <circle
-            key={i}
-            cx="50" cy="50" r="42"
-            fill="none"
-            stroke={s.color}
-            strokeWidth="14"
-            strokeDasharray={`${(s.len / 100) * C} ${C}`}
-            strokeDashoffset={-((s.offset / 100) * C)}
-            strokeLinecap="round"
-          />
-        ))}
+      {segs.filter(s => s.label).map((s, i) => (
+        <div
+          key={i}
+          className="absolute text-[10px] text-muted-foreground bg-secondary/70 backdrop-blur-sm px-2 py-0.5 rounded-full border border-border/50"
+          style={s.labelPos}
+        >
+          {s.label}
+        </div>
+      ))}
+
+      <svg viewBox="0 0 100 100" className="w-32 h-32 -rotate-90 relative animate-float" style={{ animationDuration: "8s" }}>
+        <defs>
+          <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="hsl(268 90% 78%)" />
+            <stop offset="100%" stopColor="hsl(245 90% 70%)" />
+          </linearGradient>
+          <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="hsl(225 95% 72%)" />
+            <stop offset="100%" stopColor="hsl(210 90% 65%)" />
+          </linearGradient>
+          <linearGradient id="g3" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="hsl(195 90% 75%)" />
+            <stop offset="100%" stopColor="hsl(210 85% 70%)" />
+          </linearGradient>
+          <linearGradient id="g4" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="hsl(320 85% 80%)" />
+            <stop offset="100%" stopColor="hsl(290 80% 72%)" />
+          </linearGradient>
+          <filter id="donutGlow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="2" result="b" />
+            <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+          </filter>
+        </defs>
+
+        {/* track */}
+        <circle cx="50" cy="50" r="42" fill="none" stroke="hsl(230 35% 14%)" strokeWidth="14" />
+
+        {segs.map((s, i) => {
+          const dash = mounted ? (s.len / 100) * C : 0;
+          const offset = -((acc / 100) * C);
+          acc += s.len;
+          return (
+            <circle
+              key={i}
+              cx="50" cy="50" r="42"
+              fill="none"
+              stroke={s.color}
+              strokeWidth="14"
+              strokeDasharray={`${dash} ${C}`}
+              strokeDashoffset={offset}
+              strokeLinecap="round"
+              filter="url(#donutGlow)"
+              style={{ transition: "stroke-dasharray 1200ms cubic-bezier(.2,.8,.2,1)", transitionDelay: `${i * 150}ms` }}
+            />
+          );
+        })}
       </svg>
     </div>
   );
